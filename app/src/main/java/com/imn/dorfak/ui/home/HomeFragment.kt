@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.imn.dorfak.databinding.FragmentHomeBinding
+import com.imn.dorfak.ui.components.CenterZoomLayoutManager
 
 class HomeFragment : Fragment() {
 
@@ -24,13 +24,13 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater).apply {
             recyclerView.apply {
                 adapter = HomeAdapter()
-                layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
+                layoutManager = CenterZoomLayoutManager(requireContext(), HORIZONTAL, false)
             }
 
         }
-        homeViewModel.text.observe(viewLifecycleOwner, { getAdapter().data = it })
+        homeViewModel.text.observe(viewLifecycleOwner, { getHomeAdapter().data = it })
         return binding.root
     }
 
-    private fun getAdapter() = binding.recyclerView.adapter as HomeAdapter
+    private fun getHomeAdapter() = binding.recyclerView.adapter as HomeAdapter
 }

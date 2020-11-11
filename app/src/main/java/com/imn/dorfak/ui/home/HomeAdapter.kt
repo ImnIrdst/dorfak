@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.imn.dorfak.databinding.ItemHomeAdapterBinding
+import com.imn.dorfak.utils.screenSize
 
 class HomeAdapter : RecyclerView.Adapter<HomeItemViewHolder>() {
 
@@ -33,6 +34,9 @@ class HomeItemViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(text: String) {
+        val detectedWidth = (binding.root.context.screenSize.x / 1.3).toInt()
+
+        binding.root.layoutParams.width = detectedWidth
         binding.textView.text = text
     }
 }
