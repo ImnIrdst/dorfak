@@ -4,14 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.imn.dorfak.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
+import com.imn.dorfak.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
@@ -19,13 +20,17 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        binding = FragmentHomeBinding.inflate(inflater).apply {
+            recyclerView.apply {
+                adapter = HomeAdapter()
+                layoutManager = LinearLayoutManager(requireContext(), HORIZONTAL, false)
+            }
+
+        }
+        homeViewModel.text.observe(viewLifecycleOwner, { getAdapter().data = it })
+        return binding.root
     }
+
+    private fun getAdapter() = binding.recyclerView.adapter as HomeAdapter
 }
