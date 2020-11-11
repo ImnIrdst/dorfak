@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
             }
 
         }
-        homeViewModel.text.observe(viewLifecycleOwner, { getHomeAdapter().data = it })
+        homeViewModel.urls.observe(viewLifecycleOwner, { getHomeAdapter().data = it })
         return binding.root
     }
 

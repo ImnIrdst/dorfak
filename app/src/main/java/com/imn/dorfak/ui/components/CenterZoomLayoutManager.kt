@@ -11,7 +11,7 @@ import kotlin.math.min
 
 class CenterZoomLayoutManager : LinearLayoutManager {
 
-    private val mZoomAmount = 0.50f
+    private val mZoomAmount = 0.9f
 
     private val smoothScroller: CenterSmoothScroller
 

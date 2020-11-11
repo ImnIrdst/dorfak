@@ -3,6 +3,7 @@ package com.imn.dorfak.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.imn.dorfak.databinding.ItemHomeAdapterBinding
 import com.imn.dorfak.utils.screenSize
 
@@ -33,10 +34,12 @@ class HomeItemViewHolder(
     private val binding: ItemHomeAdapterBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun onBind(text: String) {
+    fun onBind(url: String) {
         val detectedWidth = (binding.root.context.screenSize.x / 1.3).toInt()
 
         binding.root.layoutParams.width = detectedWidth
-        binding.textView.text = text
+        Glide.with(binding.root.context)
+            .load(url)
+            .into(binding.imageView)
     }
 }
